@@ -24,38 +24,43 @@ public class ListController {
 
     public ListController () {
         columnChoices.put("all", "All");
-        columnChoices.put("employer", "Employer");
-        columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
+        columnChoices.put("employer", "Employer");
         columnChoices.put("coreCompetency", "Skill");
+        columnChoices.put("location", "Location");
 
-        tableChoices.put("employer", JobData.getAllEmployers());
-        tableChoices.put("location", JobData.getAllLocations());
+        tableChoices.put("all","View All");
         tableChoices.put("positionType", JobData.getAllPositionTypes());
+        tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
+        tableChoices.put("location", JobData.getAllLocations());
     }
 
     @GetMapping(value = "")
     public String list(Model model) {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
-        model.addAttribute("employers", JobData.getAllEmployers());
-        model.addAttribute("locations", JobData.getAllLocations());
+
+        model.addAttribute("allJobs","View All" );
         model.addAttribute("positions", JobData.getAllPositionTypes());
+        model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("skills", JobData.getAllCoreCompetency());
+        model.addAttribute("locations", JobData.getAllLocations());
 
         return "list";
     }
 
     @GetMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
+    public String listJobsByColumnAndValue(Model model,
+                                           @RequestParam String column,
+                                           @RequestParam(required = false) String value) {
         ArrayList<Job> jobs;
         if (column.equals("all")){
             jobs = JobData.findAll();
             model.addAttribute("title", "All Jobs");
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
-            model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+            model.addAttribute("title","Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
 
