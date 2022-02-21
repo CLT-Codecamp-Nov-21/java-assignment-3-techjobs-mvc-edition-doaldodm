@@ -42,15 +42,9 @@ public class SearchController {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
 
-
-//        if (searchTerm.equals("")) {
-//            jobs = JobData.findAll();
-//        } else {
-//            jobs = JobData.findByColumnAndValue(searchType, searchTerm);
-//        }
-
         model.addAttribute("title", title);
         model.addAttribute("jobs", jobs);
+        model.addAttribute("searchType",searchType);
         return "search";
     }
 
