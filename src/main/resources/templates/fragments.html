@@ -33,28 +33,41 @@
         <td>ID</td>
         <td th:text="${job.getId()}"></td>
     </tr>
+    <!--    <tr>-->
+    <!--        <td>Name</td>-->
+    <!--        <td th:text="${job.getName()}" ></td>-->
+    <!--    </tr>-->
     <tr>
         <td>Name</td>
         <td th:text="${job.getName()}"></td>
     </tr>
+
+
     <tr>
         <td>Employer</td>
-        <td th:text="${job.getEmployer()}"></td>
+        <td class="pseudolink" th:text="${job.getEmployer()}"
+            th:onclick="|window.location.href='@{/list/jobs(column='employer',value=${job.getEmployer()})}'|">
+        </td>
     </tr>
     <tr>
         <td>Location</td>
-        <td th:text="${job.getLocation()}"></td>
+        <td class="pseudolink" th:text="${job.getLocation()}"
+            th:onclick="|window.location.href='@{/list/jobs(column='location',value=${job.getLocation})}'|">
+        </td>
     </tr>
     <tr>
         <td>Position Type</td>
-        <td th:text="${job.getPositionType()}"></td>
+        <td class="pseudolink" th:text="${job.getPositionType()}"
+            th:onclick="|window.location.href='@{/list/jobs(column='positionType',value=${job.getPositionType()})}'|">
+        </td>
     </tr>
     <tr>
         <td>Skill</td>
-        <td th:text="${job.getCoreCompetency()}"></td>
+        <td class="pseudolink" th:text="${job.getCoreCompetency()}"
+            th:onclick="|window.location.href='@{/list/jobs(column='coreCompetency',value=${job.getCoreCompetency()})}'|"></td>
+
     </tr>
 </table>
-
 
 </body>
 </html>
